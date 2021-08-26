@@ -13,7 +13,7 @@ if __name__ == "__main__":
             #self.sername=sername
             self.phon=phon
             self.type_of_bussines=type_of_bussines
-            self._len_name =0                                 #<--@PROPERTY---Ćw 7.2__zmienna__dynamiczna_użyta w lini ...53
+            self.len_name = name                        #<--@PROPERTY---Ćw 7.2__zmienna__dynamiczna_użyta w lini ...53 i 54
 
         def __str__(self):
             return f'(BuisnesCard of {self.name}, phon number{self.phon}, type_of_bussines {self.type_of_bussines})'
@@ -21,7 +21,7 @@ if __name__ == "__main__":
             return print (f"Kontaktuj się z  {self.name} pod numerem {self.phon}")
         @property
         def len_name(self):
-            return self.len_name
+            return self._len_name
         @len_name.setter
         def len_name(self,name):
             self._len_name=len(name)
@@ -30,7 +30,7 @@ if __name__ == "__main__":
     new_card1=BuissnesCard(fake.name(),'1111','Spzoo')
     new_card2=BuissnesCard(fake.name(),'3333','SA')
     new_card3=BuissnesCard(fake.name(),'5555','KOMANDYTOWA')
-    new_card4=BuissnesCard(fake.name(),'2222','BlackMarket')
+    new_card4=BuissnesCard("Bodzio Bombik",'2222','BlackMarket')
     print(new_card1)
     logging.info(f"otworzono program")
 
@@ -48,8 +48,9 @@ if __name__ == "__main__":
     print("zakonczenie mod 7.1 ponizej 7.2 \n\n")
 #___________________________________ćw_mod_7.2_________________________________________________________________
 new_card1.contact()
-print (f'wypisanie  new_card.name to => {new_card1.name}')
-print(f' typ zmiennej name to {type(new_card1.name)} ')          # name to string len powinno zadzałać
+#print (f'wypisanie  new_card.name to => {new_card1.name}')
+#print(f' typ zmiennej name to {type(new_card1.name)} a długość to {print(len(new_card1.name))}') # name to string len powinno zadzałać
 print(new_card1.len_name)     #!!!!!!!!!!!!!!!!!!!!!!!!!!#nie działa !!!!!!!!!!!!!!!!!!!!!!!!!!!
+print(new_card4.len_name) 
 
 #_________________________________________THE_END_______________________________________________________________
