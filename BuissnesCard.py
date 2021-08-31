@@ -61,7 +61,6 @@ Biznes_card.contact()                                                           
 print(f' zmienna dynamiczna clasy potomnej:{Base_card.len_name}, {Base_card.name}')
 print(f' zmienna dynamiczna clasy potomnej:{Biznes_card.len_name}, {Biznes_card.name}')
 #_________________________________________Generator_Wizytówek_________________________________________________
-#card_options=['base','business']
 type=input('Dla Base wybierz: 0 dla Biznes wybierz: 1\n')
 quantity=input('wpisz liczbę wizytówek do stworzenia\n')
 card_list=[]
@@ -71,7 +70,7 @@ def fcreate_contacts(_quantity,_type):
     print("wszedłem do funkcji")   
     for i in range(int(_quantity)):
         if int(_type) == 0:
-            x=BaseContact(fake.name(),fake.phone_number())#fake.phon_number())
+            x=BaseContact(fake.name(),fake.phone_number())
             card_list.append(x)
             print(card_list[i])
             
@@ -82,4 +81,6 @@ def fcreate_contacts(_quantity,_type):
         i+=1
 fcreate_contacts(quantity,type)    
 for i in range (len(card_list)):
-    print(f"koncowe wyswietlenie rezultatu zapisu do listy nr karty {i} w liście to : {card_list[i]}")                
+    print(f"koncowe wyswietlenie rezultatu zapisu do listy nr karty {i} w liście to : {card_list[i]}")      
+
+#_________________________________________T__H__E__--__E__N__D__________________________________________          
