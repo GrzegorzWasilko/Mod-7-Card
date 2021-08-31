@@ -1,20 +1,21 @@
 
 import logging
+from re import X
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s ', filename="logfile-wizytówka.log")
 from faker import Faker
 fake = Faker()
 
 if __name__ == "__main__":
-#_____________________________________Class_Begin_Here_____________________________________________________<<<<<<<<<<<<<<<
+#_____________________________________BaseContact Class_Begin_Here__________________________________________<<<<<<<<<<<<<<<
     class BaseContact :                                                 
-        def __init__(self,name, phon):                                 #<--------------------------------------Konstruktor 
+        def __init__(self,name, phon):                                 #<---------------------------------------Konstruktor 
             self.name=name
             self.phon=phon
-            self.len_name = name                       #<--@PROPERTY---Ćw 7.2__zmienna__dynamiczna_użyta w lini ...53 i 54
+            self.len_name = name                      
 
         def __str__(self):
             return (f'(BuisnesCard of {self.name},phon number:{self.phon})') #____, type_of_bussines {self.type_of_bussines}
-        def contact(self):                                               #<-------ćw 7.2 def_contact()----wywołanie linia 50
+        def contact(self):                                               #<-------Zad_1_Mod_7_contact()---wywołanie linia 59
             return print (f"Kontaktuj się z  {self.name} pod numerem PRYWATNYM:{self.phon}")
         @property
         def len_name(self):
@@ -41,50 +42,44 @@ if __name__ == "__main__":
         def _type_of_business(self,value):
             self.type_of_business=value +" Sp.z.o.o"
     #_ _ _ _ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ 
-        def contact(self):                                               #<-------ćw 7.2 def_contact()----wywołanie linia 50
+        def contact(self):                                        #<-------Zad_1_Mod_7_contact()---wywołanie linia 60
                 return print (f"Kontaktuj się z {self.name} pod numerem SŁUŻBOWYM : {self.business_phon}")
 
 
     #____________________________________Child_Class_End____________________________________________________
 
-
-    new_card1= BaseContact(fake.name(),'111 111 111')
-    new_card2= BaseContact(fake.name(),'333 333 333')
-    #new_card3= BaseCard(fake.name(),'5555','KOMANDYTOWA')
-    #new_card4= BaseCard("Bodzio Bombik",'2222','BlackMarket')
-    print(new_card1)
     logging.info(f"otworzono program")
 
-#______________________________________ćw_mod_7.1__lambda, iterowanie po liscie z klasami , sortowanie__________
-    '''
- card_list=[new_card1,new_card2,new_card3,new_card4]
-      print(new.name,new.phon,new.type_of_bussines,)
-    sort=sorted(card_list,key=lambda card: card.name)
-    for card in sort:
-        print(card)#dla czego nie działa __str__?
-    print("\n")
-    sort_phon=sorted(card_list,key=lambda card: card.phon)
-    for card in sort_phon:    
-        print (card)
-    print("zakonczenie mod 7.1 ponizej 7.2 \n ")
-'''
-#___________________________________ćw_mod_7.2_________________________________________________________________
-new_card1.contact()
-    #print (f'wypisanie  new_card.name to => {new_card1.name}')
-    #print(f' typ zmiennej name to {type(new_card1.name)} a długość to {print(len(new_card1.name))}') 
-print(new_card1.len_name)                                                       #<----wywołanie property.setter
-print(new_card2.len_name)                                                       #<----wywołanie property.setter
-
-#___________________________________ZADANIE ! MODUŁ 7________________________________________________________
+#_______________________________________ZADANIE_1_MODUŁ 7________________________________________________________
 Base_card= BaseContact(fake.name(),'111 111 111')
-print (f'\n Wyświetlam dane wizytówki z klasy bazowej \n najpierw funkcja contact : {Base_card.contact()}') #____funkcja contact() clasy bazowej
 Biznes_card=BussnesCard('Kasjer','123 456 789','kiosk',fake.name(),'222 222 222')
-print(f' type_of_biznes obietu BiznesCard to:{Biznes_card._type_of_business}, imie, nazwisko to:{Biznes_card.name}, telefon:{Biznes_card.phon}') #__sprawdzam poprawność wpisania zmiennych
+#print(f' type_of_biznes obiektu BiznesCard to:{Biznes_card._type_of_business}, imie, nazwisko to:{Biznes_card.name}, telefon:{Biznes_card.phon}') #__sprawdzam poprawność wpisania zmiennych
+print(Base_card)
 print(Biznes_card)
-Biznes_card.contact()                                                                               #___funkcja contact() clasy potomnej.
-Base_card.contact()                                                                                 #___funkcja contact() clasy bazowej.
-print(f' zmienna dynamiczna clasy potomnej:{Base_card.len_name} , {Base_card.name}')
-print(f' zmienna dynamiczna clasy potomnej:{Biznes_card.len_name},{Biznes_card.name}')
+Base_card.contact()                                                               #___funkcja contact() clasy bazowej.
+Biznes_card.contact()                                                             #___funkcja contact() clasy potomnej.
+print(f' zmienna dynamiczna clasy potomnej:{Base_card.len_name}, {Base_card.name}')
+print(f' zmienna dynamiczna clasy potomnej:{Biznes_card.len_name}, {Biznes_card.name}')
 #_________________________________________Generator_Wizytówek_________________________________________________
-def fake_card_generator(number,type):
-    pass
+#card_options=['base','business']
+type=input('Dla Base wybierz: 0 dla Biznes wybierz: 1\n')
+quantity=input('wpisz liczbę wizytówek do stworzenia\n')
+card_list=[]
+print(type,quantity)
+i=0
+def fcreate_contacts(_quantity,_type): 
+    print("wszedłem do funkcji")   
+    for i in range(int(_quantity)):
+        if int(_type) == 0:
+            x=BaseContact(fake.name(),fake.phone_number())#fake.phon_number())
+            card_list.append(x)
+            print(card_list[i])
+            
+        if int(_type) == 1:
+            card_list.append(i)
+            card_list[i]=BussnesCard(fake.job(),fake.phone_number(),fake.bs(),fake.name(),fake.phone_number())
+            print(card_list[i])
+        i+=1
+fcreate_contacts(quantity,type)    
+for i in range (len(card_list)):
+    print(f"koncowe wyswietlenie rezultatu zapisu do listy nr karty {i} w liście to : {card_list[i]}")                
